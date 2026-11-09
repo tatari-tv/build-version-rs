@@ -1,0 +1,21 @@
+name: ci
+
+# Public repo: a public repo cannot resolve workflows or actions from the internal
+# tatari-tv/github-actions, so this calls the public twin. CI is `otto ci` via
+# rust-ci.yml; the caller owns the trigger. Push on every branch, including main,
+# because `bump release` waits for CI on the main commit before it tags.
+on:
+  push:
+    branches: ['**']
+  pull_request: {}
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    # No rust-version: the repo's rust-toolchain.toml picks the toolchain, and this
+    # release installs clippy and rustfmt on whichever toolchain that is, and cargo-deny
+    # when the repo has a deny.toml. The shallow checkout is fine here: the tests build
+    # their own temp git repos and this crate never calls emit() on itself.
+    uses: tatari-tv/github-actions-public/.github/workflows/rust-ci.yml@v2.3.3

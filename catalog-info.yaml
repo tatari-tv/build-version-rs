@@ -1,0 +1,19 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: "build-version-rs"
+  description: "Compile-time BUILD_VERSION, GIT_REVISION, GIT_SHA and GIT_BRANCH for Tatari Rust binaries, anchored on the Cargo.toml version tag"
+  annotations:
+    github.com/project-slug: "tatari-tv/build-version-rs"
+    tatari.tv/language: "rust"
+    tatari.tv/team: "SRE"
+    tatari.tv/audience: "internal"
+  links:
+    - url: "https://tatari.atlassian.net/browse/SRE-4429"
+      title: "SRE-4429: Rust --version and /version from Cargo.toml"
+      icon: "docs"
+      type: "ticket"
+spec:
+  type: "library"
+  owner: "group:default/sre"
+  lifecycle: experimental

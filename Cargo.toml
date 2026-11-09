@@ -1,0 +1,8 @@
+[package]
+name = "build-version"
+version = "0.1.0"
+edition = "2024"
+authors = ["Scott Idler <scott.idler@tatari.tv>"]
+description = "Compile-time BUILD_VERSION, GIT_REVISION, GIT_SHA and GIT_BRANCH for Tatari Rust binaries, anchored on the Cargo.toml version tag"
+repository = "https://github.com/tatari-tv/build-version-rs"
+license = "MIT"
