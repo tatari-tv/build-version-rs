@@ -56,7 +56,11 @@ fn row3_unusable_git_dir_fails_with_stderr_and_names_safe_directory() {
     write(&dir.path().join(".git"), &format!("gitdir: {}\n", missing.display()));
     for is_ci in [false, true] {
         let message = error(dir.path(), "0.2.1", is_ci);
-        assert!(message.contains("not a git repository"), "{message}");
+        // git's own wording varies by version (2.53: "not a git repository",
+        // 2.56: "gitfile does not point to a valid repository"), so pin ours
+        // and only require that git's fatal line is passed through.
+        assert!(message.starts_with("git rev-parse --git-dir failed in"), "{message}");
+        assert!(message.contains("fatal: "), "{message}");
         assert!(message.contains("safe.directory"), "{message}");
     }
 }
